@@ -19,6 +19,7 @@ all = [
     "nats",
     "vendored-protoc",
     "kafka",
+    "risingwave",
     "open-api",
 ]
 sqlx-postgres = ["sqlx"]
@@ -28,6 +29,7 @@ router = ["dep:tower-http", "dep:tower"]
 nats = ["dep:async-nats"]
 default = ["sqlx-postgres", "s3-signer", "router", "vendored-protoc"]
 kafka = ["dep:rdkafka"]
+risingwave = []
 vendored-protoc = []
 test-utils = ["lakekeeper-io/storage-in-memory"]
 open-api = ["dep:utoipa", "dep:utoipa-swagger-ui", "dep:serde_norway"]

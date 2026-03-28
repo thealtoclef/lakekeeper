@@ -113,6 +113,13 @@ pub async fn get_default_cloud_event_backends_from_config()
         cloud_event_sinks
             .push(Arc::new(kafka_publisher) as Arc<dyn CloudEventBackend + Sync + Send>);
     }
+    #[cfg(feature = "risingwave")]
+    if let Some(rw_publisher) =
+        super::backends::risingwave::build_risingwave_publisher_from_config()?
+    {
+        cloud_event_sinks
+            .push(Arc::new(rw_publisher) as Arc<dyn CloudEventBackend + Sync + Send>);
+    }
 
     if let Some(true) = &CONFIG.log_cloudevents {
         let tracing_publisher = TracingPublisher;

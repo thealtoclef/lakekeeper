@@ -240,6 +240,11 @@ pub struct DynAppConfig {
     #[cfg(feature = "kafka")]
     pub kafka_config: Option<crate::service::events::backends::kafka::KafkaConfig>,
 
+    // ------------- RISINGWAVE CLOUDEVENTS ----------
+    /// RisingWave webhook URL (e.g., http://risingwave:4560/webhook/dev/public/lakekeeper_events_raw).
+    /// If not set, events are not published to RisingWave.
+    pub risingwave_webhook_url: Option<Url>,
+
     // ------------- TRACING CLOUDEVENTS ----------
     pub log_cloudevents: Option<bool>,
 
@@ -786,6 +791,7 @@ impl Default for DynAppConfig {
             #[cfg(feature = "kafka")]
             kafka_config: None,
             kafka_topic: None,
+            risingwave_webhook_url: None,
             log_cloudevents: None,
             authz_backend: AuthZBackend::default(),
             trusted_engines: HashMap::new(),
